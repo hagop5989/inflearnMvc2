@@ -22,13 +22,13 @@ public class BasicController {
 
     @GetMapping("text-basic")
     public String textBasic(Model model) {
-        model.addAttribute("data","Hello <b>Spring</b>!!");
+        model.addAttribute("data", "Hello <b>Spring!</b>");
         return "basic/text-basic";
     }
 
     @GetMapping("text-unescaped")
     public String textUnescaped(Model model) {
-        model.addAttribute("data","Hello <b>Spring</b>!!");
+        model.addAttribute("data", "Hello <b>Spring!</b>");
         return "basic/text-unescaped";
     }
 
@@ -41,13 +41,13 @@ public class BasicController {
         list.add(userA);
         list.add(userB);
 
-        Map<String,User> map = new HashMap<>();
-        map.put("userA",userA);
-        map.put("userB",userB);
+        Map<String, User> map = new HashMap<>();
+        map.put("userA", userA);
+        map.put("userB", userB);
 
-        model.addAttribute("user",userA);
-        model.addAttribute("users",list);
-        model.addAttribute("userMap",map);
+        model.addAttribute("user", userA);
+        model.addAttribute("users", list);
+        model.addAttribute("userMap", map);
 
         return "basic/variable";
     }
@@ -64,8 +64,8 @@ public class BasicController {
 
     @Component("helloBean")
     static class HelloBean {
-        public String hello (String data) {
-            return "Hello" + data;
+        public String hello(String data) {
+            return "Hello " + data;
         }
     }
 
@@ -75,22 +75,24 @@ public class BasicController {
         return "basic/date";
     }
 
-    @GetMapping("/link")
+    @GetMapping("link")
     public String link(Model model) {
-        model.addAttribute("param1","data1");
-        model.addAttribute("param2","data2");
+        model.addAttribute("param1", "data1");
+        model.addAttribute("param2", "data2");
         return "basic/link";
+
     }
 
     @GetMapping("/literal")
     public String literal(Model model) {
-        model.addAttribute("data","Spring!");
+        model.addAttribute("data", "Spring!");
         return "basic/literal";
     }
+
     @GetMapping("/operation")
     public String operation(Model model) {
-        model.addAttribute("nullData", null);
-        model.addAttribute("data", "Spring!");
+        model.addAttribute("nullData",null);
+        model.addAttribute("data","Spring!!");
         return "basic/operation";
     }
 
@@ -105,43 +107,18 @@ public class BasicController {
         return "basic/each";
     }
 
-    @GetMapping("/condition")
-    public String condition(Model model) {
-        addUsers(model);
-        return "basic/condition";
-    }
-
-    @GetMapping("/comments")
-    public String comments(Model model) {
-        model.addAttribute("data","Spring!");
-        return "basic/comments";
-    }
-
-    @GetMapping("/block")
-    public String block(Model model) {
-        addUsers(model);
-        return "basic/block";
-    }
-
-    @GetMapping("/javascript")
-    public String javascript(Model model) {
-        model.addAttribute("user",new User("UserA",10));
-        addUsers(model);
-        return "basic/javascript";
-    }
-
-
     private void addUsers(Model model) {
         List<User> list = new ArrayList<>();
-        list.add(new User("UserA", 10));
-        list.add(new User("UserB", 20));
-        list.add(new User("UserC", 30));
+        list.add(new User("userA", 10));
+        list.add(new User("userB", 20));
+        list.add(new User("userC", 30));
 
         model.addAttribute("users", list);
     }
 
+
     @Data
-    static class User {
+   class User {
         private String username;
         private int age;
 
